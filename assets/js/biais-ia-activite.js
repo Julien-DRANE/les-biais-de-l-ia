@@ -1,4 +1,4 @@
-const { situations, summaryItems, conclusionSections, caseStudy } = window.activityData;
+﻿const { situations, summaryItems, conclusionSections, caseStudy } = window.activityData;
 
 const state = {
   score: 0,
@@ -81,7 +81,7 @@ function renderSituations() {
 
       <div class="image-card">
         <img src="${situation.image}" alt="${situation.alt}">
-        <div class="image-caption">Image generee par IA - Fichier original sans modification</div>
+        <div class="image-caption">Image générée par IA - Fichier original sans modification</div>
       </div>
 
       <div class="question-card">
@@ -97,35 +97,35 @@ function renderSituations() {
           `).join('')}
         </div>
         <div class="btn-row">
-          <button class="btn btn-primary" id="validate-${situation.id}" data-action="validate" data-id="${situation.id}">Valider ma reponse</button>
+          <button class="btn btn-primary" id="validate-${situation.id}" data-action="validate" data-id="${situation.id}">Valider ma réponse</button>
         </div>
       </div>
 
       <div class="reveal-section" id="reveal-${situation.id}">
         <div class="reveal-card prompt-card">
-          <h3>Prompt utilise</h3>
+          <h3>Prompt utilisé</h3>
           <p>${situation.promptIntro}</p>
           <div class="prompt-highlight">${situation.prompt}</div>
         </div>
 
         <div class="reveal-card bias-card">
-          <h3>Lecture rapide du resultat</h3>
+          <h3>Lecture rapide du résultat</h3>
           <p>${situation.biasText}</p>
         </div>
 
         <div class="reveal-card layers-card">
-          <h3>Ou se situe le biais ?</h3>
+          <h3>Où se situe le biais ?</h3>
           <div class="bias-grid">
             <div class="bias-layer">
               <h4>Biais du prompt</h4>
               <p>${situation.biasLayers.prompt}</p>
             </div>
             <div class="bias-layer">
-              <h4>Biais du modele</h4>
+              <h4>Biais du modèle</h4>
               <p>${situation.biasLayers.model}</p>
             </div>
             <div class="bias-layer">
-              <h4>Biais d'interpretation</h4>
+              <h4>Biais d'interprétation</h4>
               <p>${situation.biasLayers.interpretation}</p>
             </div>
           </div>
@@ -139,14 +139,14 @@ function renderSituations() {
         </div>
 
         <div class="reveal-card debate-card">
-          <h3>Debat formateur : agentivite</h3>
+          <h3>Débat formateur : agentivité</h3>
           <ul>
             ${situation.debate.map((item) => `<li>${item}</li>`).join('')}
           </ul>
         </div>
 
         <div class="reveal-card data-card">
-          <h3>Donnee a retenir</h3>
+          <h3>Donnée à retenir</h3>
           <p>${situation.fact}</p>
         </div>
 
@@ -168,8 +168,8 @@ function renderConclusion() {
           <span class="score-num" id="score-num">0</span>
           <span class="score-den">/ ${situations.length}</span>
         </div>
-        <h2 id="score-title">Resultats de l'activite</h2>
-        <p id="score-msg">Voici votre bilan et les points cles a retenir</p>
+        <h2 id="score-title">Résultats de l'activité</h2>
+        <p id="score-msg">Voici votre bilan et les points clés à retenir</p>
       </div>
 
       <div class="summary-grid">
@@ -192,7 +192,7 @@ function renderConclusion() {
       `).join('')}
 
       <div class="btn-row" style="justify-content:center; margin-top:1.5rem">
-        <button class="btn btn-outline" data-action="restart">Recommencer l'activite</button>
+        <button class="btn btn-outline" data-action="restart">Recommencer l'activité</button>
       </div>
     </section>
   `;
@@ -202,7 +202,7 @@ function renderCaseStudy() {
   caseStudyRoot.innerHTML = `
     <section class="case-study-panel">
       <div class="case-hero">
-        <div class="question-label">Etude de cas</div>
+        <div class="question-label">Étude de cas</div>
         <h2>${caseStudy.title}</h2>
         <p>${caseStudy.intro}</p>
       </div>
@@ -249,7 +249,7 @@ function renderCaseStudy() {
       </div>
 
       <div class="reveal-card debate-card">
-        <h3>Debat formateur : que corrige vraiment le modele ?</h3>
+        <h3>Débat formateur : que corrige vraiment le modèle ?</h3>
         <ul>
           ${caseStudy.debate.map((item) => `<li>${item}</li>`).join('')}
         </ul>
@@ -264,7 +264,7 @@ function validate(situation) {
 
   const selected = document.querySelector(`input[name="q${situation.id}"]:checked`);
   if (!selected) {
-    showToast('Veuillez selectionner une reponse', 'warn');
+    showToast('Veuillez sélectionner une réponse', 'warn');
     return;
   }
 
@@ -288,9 +288,9 @@ function validate(situation) {
 
   if (selectedValue === situation.answer) {
     state.score += 1;
-    showToast('Bonne reponse. La decomposition des biais apparait ci-dessous.', 'correct');
+    showToast('Bonne réponse. La décomposition des biais apparaît ci-dessous.', 'correct');
   } else {
-    showToast('Ce n est pas ca. Comparez maintenant le prompt reel et les ajouts du modele.', 'incorrect');
+    showToast('Ce n\'est pas ça. Comparez maintenant le prompt réel et les ajouts du modèle.', 'incorrect');
   }
 
   validateBtn.disabled = true;
@@ -322,7 +322,7 @@ function showConclusion() {
 
   document.getElementById('score-num').textContent = String(state.score);
   progressFill.style.width = '100%';
-  progLabel.textContent = 'Termine';
+  progLabel.textContent = 'Terminé';
   progCount.textContent = `${situations.length} / ${situations.length}`;
 
   const scoreTitle = document.getElementById('score-title');
@@ -330,16 +330,16 @@ function showConclusion() {
 
   if (state.score === situations.length) {
     scoreTitle.textContent = 'Excellent ! Score parfait';
-    scoreMsg.textContent = 'Vous avez bien repere les formulations de prompt et les ajouts du modele.';
+    scoreMsg.textContent = 'Vous avez bien repéré les formulations de prompt et les ajouts du modèle.';
   } else if (state.score === situations.length - 1) {
-    scoreTitle.textContent = 'Tres bien';
-    scoreMsg.textContent = 'Vous distinguez deja bien les cadrages. Les cartes de biais vous aident a affiner le diagnostic.';
+    scoreTitle.textContent = 'Très bien';
+    scoreMsg.textContent = 'Vous distinguez déjà bien les cadrages. Les cartes de biais vous aident à affiner le diagnostic.';
   } else if (state.score === 1) {
-    scoreTitle.textContent = 'Un bon debut';
-    scoreMsg.textContent = 'L activite montre justement que l intuition seule ne suffit pas : il faut separer prompt, modele et interpretation.';
+    scoreTitle.textContent = 'Un bon début';
+    scoreMsg.textContent = 'L\'activité montre justement que l\'intuition seule ne suffit pas : il faut séparer prompt, modèle et interprétation.';
   } else {
-    scoreTitle.textContent = 'Resultat a analyser';
-    scoreMsg.textContent = 'La confusion entre ce qui est demande, produit et interprete est frequente. Reprenez les trois niveaux pour chaque image.';
+    scoreTitle.textContent = 'Résultat à analyser';
+    scoreMsg.textContent = 'La confusion entre ce qui est demandé, produit et interprété est fréquente. Reprenez les trois niveaux pour chaque image.';
   }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -354,7 +354,7 @@ function restart() {
   setActiveTab('quiz');
 
   progressFill.style.width = '0%';
-  progLabel.textContent = 'Debut';
+  progLabel.textContent = 'Début';
   progCount.textContent = `0 / ${situations.length}`;
 
   document.querySelectorAll('.situation').forEach((node) => node.classList.remove('active'));
